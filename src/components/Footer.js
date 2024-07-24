@@ -5,7 +5,7 @@ const FooterContainer = styled.footer`
   padding: 20px;
   text-align: center;
   background: ${({ theme }) => theme.background};
-  color: ${({ theme }) => theme.text};
+  color: ${({ theme }) => theme.headerText};
 `;
 
 function Footer() {

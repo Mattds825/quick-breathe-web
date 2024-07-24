@@ -5,7 +5,8 @@ const HeaderContainer = styled.header`
   padding: 20px;
   text-align: center;
   background: ${({ theme }) => theme.background};
-  color: ${({ theme }) => theme.text};
+  color: ${({ theme }) => theme.headerText};
+  transition: all 0.3s ease;
 `;
 
 function Header() {
