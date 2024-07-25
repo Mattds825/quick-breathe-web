@@ -11,7 +11,7 @@ const FooterContainer = styled.footer`
 function Footer() {
   return (
     <FooterContainer>
-      <p>© 2023 Breathing Meditation App</p>
+      <p>© 2024 Quick Breathe</p>
     </FooterContainer>
   );
 }

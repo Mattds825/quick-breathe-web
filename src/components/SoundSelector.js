@@ -65,7 +65,7 @@ const [titleClass, setTitleClass] = useState('button is-light');
 
   return (
     <>
-    <Title >Select you sound</Title>
+    <Title >Select your sound</Title>
     <div className="columns">
       <div className="column">
         <SoundButton
