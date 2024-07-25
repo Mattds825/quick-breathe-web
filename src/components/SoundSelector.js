@@ -9,7 +9,7 @@ const SoundSelectorContainer = styled.div`
 `;
 
 const SoundButton = styled.div`
-  margin: 10px;
+ margin: 10px;
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
@@ -18,7 +18,7 @@ const SoundButton = styled.div`
   border: none;
   border-radius: 5px;
   transition: all 0.3s ease;
-
+  
   &:hover {
     opacity: 0.8;
   }
@@ -27,9 +27,9 @@ const SoundButton = styled.div`
 function SoundSelector({selectedSound, setSelectedSound}){
     return (
         <SoundSelectorContainer>
-            <SoundButton onClick={() => setSelectedSound('Sound 1')}>Sound 1</SoundButton>
-            <SoundButton onClick={() => setSelectedSound('Sound 2')}>Sound 2</SoundButton>
-            <SoundButton onClick={() => setSelectedSound('Sound 3')}>Sound 3</SoundButton>
+            <SoundButton onClick={() => setSelectedSound('forest')}>Forest</SoundButton>
+            <SoundButton onClick={() => setSelectedSound('synth')}>Synth</SoundButton>
+            <SoundButton onClick={() => setSelectedSound('beach')}>Beach</SoundButton>
             <SoundButton onClick={() => setSelectedSound('No Sounds')}>No Sounds</SoundButton>
         </SoundSelectorContainer>
     )

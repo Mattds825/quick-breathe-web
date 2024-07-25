@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
+import showEndMeditationDialog from './EndMeditationDialog';
 
 const expand = keyframes`
 from{
@@ -35,10 +36,28 @@ const BreatheText = styled.div`
   color: ${({ theme }) => theme.text};
 `;
 
-function BreatheCircle({ time, sound }) {
+const Button = styled.button`
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background: ${({ theme }) => theme.buttonBackground};
+  color: ${({ theme }) => theme.buttonText};
+  border: none;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    opacity: 0.8;
+  }
+`;
+
+function BreatheCircle({ time, sound, endMeditation }) {
   const [breatheState, setBreatheState] = useState("in");
   const [remainingTime, setRemainingTime] = useState(time * 60); // Convert minutes to seconds
+  const [audio] = useState(new Audio(`/sounds/${sound.toLowerCase()}.mp3`));
 
+  //   Breathe in out effect
   useEffect(() => {
     const interval = setInterval(() => {
       setBreatheState((prevState) => (prevState === "in" ? "out" : "in"));
@@ -52,21 +71,62 @@ function BreatheCircle({ time, sound }) {
       return () => {
         clearInterval(interval);
         clearInterval(timer);
+       if (audio){
+        audio.pause();
+        audio.currentTime = 0;
+       }
       };
     } else {
-      return () => clearInterval(interval);
+      return () => {
+        clearInterval(interval);
+        if(audio){
+            audio.currentTime = 0;
+        audio.pause();
+        }
+      }
     }
-  }, [time]);
+  }, [time, audio]);
 
   useEffect(() => {
     if (remainingTime === 0) {
       // handle end of meditation
       setBreatheState("done");
+      if(audio){
+        audio.pause();
+      audio.currentTime = 0;
+      }
     }
-  }, [remainingTime]);
+  }, [remainingTime, audio]);
+
+  useEffect(() => {
+    if (audio) {
+      audio.loop = true;
+      audio.play().catch((error) => {
+        console.error("Audio playback failed:", error);
+      });
+    }
+
+    return () => {
+      if (audio) {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+    };
+  }, [audio]);
+
+  //   handle user ends mediation
+  const handleEndMeditation = () => {
+    showEndMeditationDialog(() => {
+      if (audio) {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+      endMeditation();
+    });
+  };
 
   return (
-    <div>
+    <div onClick={handleEndMeditation} style={{ position: 'relative' }}>
       {breatheState !== "done" ? (
         <>
           <BreatheText>
@@ -75,7 +135,10 @@ function BreatheCircle({ time, sound }) {
           <Circle breatheState={breatheState} />
         </>
       ) : (
+        <>
         <BreatheText>Your Meditation is done</BreatheText>
+        <Button onClick={endMeditation}>Done</Button>
+      </>
       )}
     </div>
   );
