@@ -132,7 +132,17 @@ function BreatheCircle({ time, sound, endMeditation }) {
           <BreatheText>
             {breatheState === "in" ? "Breathe In" : "Breathe Out"}
           </BreatheText>
-          <Circle breatheState={breatheState} />
+          <div
+            className="box"
+            style={{
+              width: '200px',
+              height: '200px',
+              borderRadius: '50%',
+              background: 'rgba(255, 255, 255, 0.5)',
+              transform: breatheState === 'in' ? 'scale(2)' : 'scale(1)',
+              transition: 'transform 4s ease-in-out'
+            }}
+          />
         </>
       ) : (
         <>

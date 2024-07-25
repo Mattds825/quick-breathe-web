@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import './BubbleRangeSlider.scss'
 
 const TimeSelectorContainer = styled.div`
   display: flex;
@@ -22,14 +23,20 @@ const Label = styled.label`
 function TimeSelector({ time, setTime }) {
   return (
     <TimeSelectorContainer>
-      <Label>Time: {time === 0 ? "No Limit" : `${time} minutes`}</Label>
-      <Slider
-        type="range"
-        min="0"
-        max="60"
-        value={time}
-        onChange={(e) => setTime(Number(e.target.value))}
-      />
+     <div className="field ">
+        <Label className="label">Time</Label>
+        <div className="control BubbleRange">
+          <input
+            className="slider is-fullwidth is-primary"
+            type="range"
+            min="0"
+            max="60"
+            value={time}
+            onChange={(e) => setTime(e.target.value)}
+          />
+          <p className="help">{time} minutes</p>
+        </div>
+      </div>
     </TimeSelectorContainer>
   );
 }

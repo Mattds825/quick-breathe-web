@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import InstructionsModal from './InstructionsModal';
-import SoundSelector from './SoundSelector';
-import TimeSelector from './TimeSelector'
+import React, { useState } from "react";
+import styled from "styled-components";
+import InstructionsModal from "./InstructionsModal";
+import SoundSelector from "./SoundSelector";
+import TimeSelector from "./TimeSelector";
+
 
 const ControlsContainer = styled.section`
   display: flex;
@@ -18,17 +19,16 @@ const Button = styled.button`
   cursor: pointer;
   background: ${({ theme }) => theme.buttonBackground};
   color: ${({ theme }) => theme.buttonText};
-  border: none;
+  border: 1px solid ${({ theme }) => theme.buttonText};
   border-radius: 5px;
   transition: all 0.3s ease;
-  
+
   &:hover {
     opacity: 0.8;
   }
 `;
 
-function Controls({themeToggler, startMeditation}){
-
+function Controls({ themeToggler, startMeditation }) {
   // Handle the instruction modal
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -36,22 +36,35 @@ function Controls({themeToggler, startMeditation}){
   const closeModal = () => setIsModalOpen(false);
 
   // Handle the sound selection
-  const [selectedSound, setSelectedSound] = useState('No Sounds');
+  const [selectedSound, setSelectedSound] = useState("No Sounds");
 
   // Handle Time
   const [time, setTime] = useState(0);
 
-    return(
-        <ControlsContainer>
-            <Button onClick={themeToggler}>Toggle Theme</Button>
-            <Button onClick={openModal} >Instructions</Button>
-            <SoundSelector selectedSound={selectedSound} setSelectedSound={setSelectedSound} />
-            <TimeSelector time={time} setTime={setTime} />
-            <Button onClick={() => startMeditation(selectedSound, time)}>Start</Button>
-            <p>Selected Sound: {selectedSound} time limit: {time}</p>
-            <InstructionsModal isOpen={isModalOpen} onClose={closeModal} />
-        </ControlsContainer>
-    )
+  return (
+    <ControlsContainer>
+      <div className="columns">
+        <div className="column">
+          <Button onClick={themeToggler}>Theme</Button>
+        </div>
+        <div className="column">
+          <Button onClick={openModal}>Instructions</Button>
+        </div>
+      </div>
+      <SoundSelector
+        selectedSound={selectedSound}
+        setSelectedSound={setSelectedSound}
+      />
+      <TimeSelector time={time} setTime={setTime} />
+      <Button className="button is-success" onClick={() => startMeditation(selectedSound, time)}>
+        Start
+      </Button>
+      <p>
+        Selected Sound: {selectedSound}. Time limit: {time}
+      </p>
+      <InstructionsModal isOpen={isModalOpen} onClose={closeModal} />
+    </ControlsContainer>
+  );
 }
 
 export default Controls;

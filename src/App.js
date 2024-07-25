@@ -7,6 +7,7 @@ import Header from "./components/Header";
 import Controls from "./components/Controls";
 import BreatheCircle from "./components/BreatheCircle";
 import Footer from "./components/Footer";
+import 'bulma/css/bulma.min.css';
 
 function App() {
   // Handle light and dark themes
@@ -47,6 +48,7 @@ function App() {
             <Controls
               themeToggler={themeToggler}
               startMeditation={startMeditation}
+              theme={theme}
             />
           )}
           <Footer />

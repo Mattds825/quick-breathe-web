@@ -11,8 +11,8 @@ const HeaderContainer = styled.header`
 
 function Header() {
     return (
-        <HeaderContainer>
-            <h1>Breathing Meditation App</h1>
+        <HeaderContainer className="hero is-primary">
+            <h1 className="title">Quick Breathe</h1>
         </HeaderContainer>
     )
 }
