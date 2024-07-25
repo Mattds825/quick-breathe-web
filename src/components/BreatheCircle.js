@@ -89,7 +89,7 @@ const Button = styled.button`
 function BreatheCircle({ time, sound, endMeditation }) {
   const [breatheState, setBreatheState] = useState("in");
   const [remainingTime, setRemainingTime] = useState(time * 60); // Convert minutes to seconds
-  const [audio] = useState(new Audio(`/sounds/${sound.toLowerCase()}.mp3`));
+  const [audio] = useState(new Audio(`./sounds/${sound.toLowerCase()}.mp3`));
 
   //   Breathe in out effect
   useEffect(() => {
