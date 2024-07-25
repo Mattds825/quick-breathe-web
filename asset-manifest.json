@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/Mattds825/quick-breathe-web/static/css/main.246223c4.css",
-    "main.js": "/Mattds825/quick-breathe-web/static/js/main.6390fb77.js",
-    "index.html": "/Mattds825/quick-breathe-web/index.html",
-    "main.246223c4.css.map": "/Mattds825/quick-breathe-web/static/css/main.246223c4.css.map",
-    "main.6390fb77.js.map": "/Mattds825/quick-breathe-web/static/js/main.6390fb77.js.map"
+    "main.css": "/quick-breathe-web/static/css/main.246223c4.css",
+    "main.js": "/quick-breathe-web/static/js/main.41e6cec3.js",
+    "index.html": "/quick-breathe-web/index.html",
+    "main.246223c4.css.map": "/quick-breathe-web/static/css/main.246223c4.css.map",
+    "main.41e6cec3.js.map": "/quick-breathe-web/static/js/main.41e6cec3.js.map"
   },
   "entrypoints": [
     "static/css/main.246223c4.css",
-    "static/js/main.6390fb77.js"
+    "static/js/main.41e6cec3.js"
   ]
 }
