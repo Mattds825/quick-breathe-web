@@ -1,6 +1,15 @@
 import React, { useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
-import showEndMeditationDialog from './EndMeditationDialog';
+import showEndMeditationDialog from "./EndMeditationDialog";
+
+const BreatheContainer = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  margin: 20px 0;
+`;
 
 const expand = keyframes`
 from{
@@ -28,11 +37,36 @@ const Circle = styled.div`
       breatheState === "in" ? expand : contract}
     4s infinite;
 `;
+const BubbleCircle = styled.div`
+  aspect-ratio: 1 / 1;
+  width: "200px";
+  height: "200px";
+  border-radius: 50%;
+  background: radial-gradient(circle at 70% 30%, #fff, rgba(0, 0, 0, 0) 25%),
+    radial-gradient(
+      circle at 60% 55%,
+      rgba(0, 0, 0, 0) 60%,
+      rgba(255, 0, 255, 0.8) 100%
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(0, 0, 0, 0) 40%,
+      rgba(0, 255, 255, 0.2) 60%,
+      rgba(0, 0, 0, 0) 68%
+    ),
+    radial-gradient(
+      circle at 50% 55%,
+      rgba(0, 0, 0, 0) 35%,
+      rgba(255, 255, 0, 0.2) 45%,
+      rgba(0, 0, 0, 0) 55%
+    );
+`;
 
 const BreatheText = styled.div`
-  position: absolute;
-  top: 20px;
-  font-size: 24px;
+   align-self: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 50%;
   color: ${({ theme }) => theme.text};
 `;
 
@@ -71,19 +105,19 @@ function BreatheCircle({ time, sound, endMeditation }) {
       return () => {
         clearInterval(interval);
         clearInterval(timer);
-       if (audio){
-        audio.pause();
-        audio.currentTime = 0;
-       }
+        if (audio) {
+          audio.pause();
+          audio.currentTime = 0;
+        }
       };
     } else {
       return () => {
         clearInterval(interval);
-        if(audio){
-            audio.currentTime = 0;
-        audio.pause();
+        if (audio) {
+          audio.currentTime = 0;
+          audio.pause();
         }
-      }
+      };
     }
   }, [time, audio]);
 
@@ -91,9 +125,9 @@ function BreatheCircle({ time, sound, endMeditation }) {
     if (remainingTime === 0) {
       // handle end of meditation
       setBreatheState("done");
-      if(audio){
+      if (audio) {
         audio.pause();
-      audio.currentTime = 0;
+        audio.currentTime = 0;
       }
     }
   }, [remainingTime, audio]);
@@ -126,13 +160,15 @@ function BreatheCircle({ time, sound, endMeditation }) {
   };
 
   return (
-    <div onClick={handleEndMeditation} style={{ position: 'relative' }}>
-      {breatheState !== "done" ? (
-        <>
-          <BreatheText>
-            {breatheState === "in" ? "Breathe In" : "Breathe Out"}
-          </BreatheText>
-          <div
+    <BreatheContainer>
+    <BreatheText>
+              {breatheState === "in" ? "Breathe In" : "Breathe Out"}
+            </BreatheText>
+      <div onClick={handleEndMeditation}>
+        {breatheState !== "done" ? (
+          <>
+            
+            {/* <div
             className="box"
             style={{
               width: '200px',
@@ -142,15 +178,25 @@ function BreatheCircle({ time, sound, endMeditation }) {
               transform: breatheState === 'in' ? 'scale(2)' : 'scale(1)',
               transition: 'transform 4s ease-in-out'
             }}
-          />
-        </>
-      ) : (
-        <>
-        <BreatheText>Your Meditation is done</BreatheText>
-        <Button onClick={endMeditation}>Done</Button>
-      </>
-      )}
-    </div>
+          /> */}
+            <BubbleCircle
+              style={{
+                width: "200px",
+                height: "200px",
+                borderRadius: "50%",
+                transform: breatheState === "in" ? "scale(2)" : "scale(1)",
+                transition: "transform 4s ease-in-out",
+              }}
+            />
+          </>
+        ) : (
+          <>
+            <BreatheText>Your Meditation is done</BreatheText>
+            <Button onClick={endMeditation}>Done</Button>
+          </>
+        )}
+      </div>
+    </BreatheContainer>
   );
 }
 

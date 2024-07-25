@@ -8,6 +8,7 @@ import Controls from "./components/Controls";
 import BreatheCircle from "./components/BreatheCircle";
 import Footer from "./components/Footer";
 import 'bulma/css/bulma.min.css';
+import './styles/layout.scss';
 
 function App() {
   // Handle light and dark themes
@@ -36,9 +37,10 @@ function App() {
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
       <>
         <GlobalStyles />
-        <div>
+        <div className="container">
           <Header />
-          {isMeditating ? (
+         <div className="main-content">
+         {isMeditating ? (
             <BreatheCircle
               time={meditationTime}
               sound={meditationSound}
@@ -51,6 +53,7 @@ function App() {
               theme={theme}
             />
           )}
+         </div>
           <Footer />
         </div>
       </>
